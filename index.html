@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="vi"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Bạn Đồng Hành - Tâm Lý Học Đường&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;amp;family=Roboto:wght@400;500&amp;display=swap');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', system-ui, sans-serif; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chat-container { max-height: 70vh; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.message-bubble { max-width: 80%; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-gradient-to-br from-blue-50 to-teal-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="flex h-screen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Sidebar --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="w-72 bg-white shadow-xl flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="p-6 border-b"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-10 h-10 bg-teal-500 rounded-2xl flex items-center justify-center text-white text-2xl"&gt;🌱&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h1 class="text-2xl font-semibold text-gray-800"&gt;Bạn Đồng Hành&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-teal-600 text-sm"&gt;Tâm lý học đường&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-xs uppercase font-medium text-gray-500 mb-3 px-3"&gt;Chủ đề phổ biến&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div onclick="startTopic('ap-luc')" class="px-4 py-3 hover:bg-teal-50 rounded-2xl cursor-pointer flex items-center gap-3 text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-lg"&gt;📚&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Áp lực học tập &amp;amp; thi cử&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div onclick="startTopic('ban-be')" class="px-4 py-3 hover:bg-teal-50 rounded-2xl cursor-pointer flex items-center gap-3 text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-lg"&gt;👥&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Mâu thuẫn với bạn bè&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div onclick="startTopic('dong-luc')" class="px-4 py-3 hover:bg-teal-50 rounded-2xl cursor-pointer flex items-center gap-3 text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-lg"&gt;🔥&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Thiếu động lực học tập&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div onclick="startTopic('can-thang')" class="px-4 py-3 hover:bg-teal-50 rounded-2xl cursor-pointer flex items-center gap-3 text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-lg"&gt;😟&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Căng thẳng, lo âu&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div onclick="startTopic('tuong-lai')" class="px-4 py-3 hover:bg-teal-50 rounded-2xl cursor-pointer flex items-center gap-3 text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-lg"&gt;🚀&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Định hướng tương lai&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mt-auto p-6 text-xs text-gray-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Bạn không cần phải mạnh mẽ một mình.&lt;br&gt;Hãy chia sẻ, mình ở đây để lắng nghe ❤️&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-2 text-teal-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="#" class="hover:underline"&gt;Hỗ trợ khẩn cấp&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Chat Area --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="flex-1 flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Header --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white shadow-sm px-6 py-4 flex items-center justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-9 h-9 bg-teal-100 rounded-2xl flex items-center justify-center text-2xl"&gt;🌱&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="font-medium"&gt;Bạn Đồng Hành&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-green-500 flex items-center gap-1"&gt;&lt;span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"&gt;&lt;/span&gt;Đang online&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="clearChat()" class="flex items-center gap-2 text-gray-500 hover:text-teal-600 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-trash"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Xóa cuộc trò chuyện&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Messages --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="chat-container" class="flex-1 p-6 overflow-y-auto chat-container bg-[radial-gradient(#f1f5f9_1px,transparent_1px)] [background-size:30px_30px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="messages" class="max-w-3xl mx-auto space-y-6"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Input --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white border-t p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="max-w-3xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex gap-3 bg-gray-100 rounded-3xl px-6 py-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input id="user-input"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                               </span>onkeydown="if(event.key === 'Enter') sendMessage()"</p>
+<p class="p1"><span class="Apple-converted-space">                               </span>type="text"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                               </span>placeholder="Chia sẻ với mình điều gì đang diễn ra nhé..."</p>
+<p class="p1"><span class="Apple-converted-space">                               </span>class="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button onclick="sendMessage()"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>class="w-10 h-10 bg-teal-500 hover:bg-teal-600 text-white rounded-2xl flex items-center justify-center transition-colors"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-paper-plane"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-center text-[10px] text-gray-400 mt-3"&gt;Bạn Đồng Hành chỉ mang tính tham khảo. Nếu cần hỗ trợ chuyên sâu, hãy liên hệ thầy cô hoặc chuyên gia tâm lý.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function initTailwind() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tailwind.config = { content: [], theme: { extend: {} } };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addMessage(text, isUser) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('messages');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bubble = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bubble.className = `flex ${isUser ? 'justify-end' : 'justify-start'} message-bubble`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (isUser) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bubble.innerHTML = `&lt;div class="bg-teal-500 text-white px-5 py-3 rounded-3xl rounded-tr-none"&gt;${text}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bubble.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-8 h-8 bg-teal-100 rounded-2xl flex-shrink-0 flex items-center justify-center text-xl mt-1"&gt;🌱&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white shadow-sm px-5 py-3 rounded-3xl rounded-tl-none text-gray-800"&gt;${text}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.appendChild(bubble);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.scrollTop = container.scrollHeight;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function getAIResponse(userMessage) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const msg = userMessage.toLowerCase().trim();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (msg.includes("áp lực") || msg.includes("thi") || msg.includes("học")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Mình hiểu bạn đang cảm thấy rất áp lực với việc học phải không? Áp lực học tập là chuyện nhiều bạn gặp phải. Bạn đang áp lực về điểm số hay kỳ thi sắp tới? Mình ở đây để lắng nghe. Nhớ là nghỉ ngơi hợp lý và chia sẻ với gia đình hoặc thầy cô cũng rất quan trọng nhé ❤️";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (msg.includes("bạn") || msg.includes("bạn bè") || msg.includes("cãi") || msg.includes("mâu thuẫn")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Có vẻ bạn đang gặp vấn đề với bạn bè. Mâu thuẫn là điều bình thường. Bạn có thể kể mình nghe chi tiết hơn được không? Đôi khi việc nói chuyện thẳng thắn sẽ giúp ích rất nhiều. Bạn không cô đơn đâu.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (msg.includes("động lực") || msg.includes("chán") || msg.includes("thất vọng")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Thiếu động lực là điều nhiều bạn gặp phải. Bạn đã thử làm gì để tìm lại niềm vui chưa? Có lẽ bắt đầu từ những việc nhỏ bạn thích. Và nếu cần, hãy chia sẻ với gia đình để họ cùng động viên bạn.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (msg.includes("căng thẳng") || msg.includes("lo âu") || msg.includes("stress") || msg.includes("lo lắng") || msg.includes("buồn")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Nghe bạn chia sẻ, mình cảm nhận được bạn đang khá căng thẳng và lo lắng. Đó là cảm xúc hoàn toàn bình thường. Bạn đã thử hít thở sâu hay đi dạo chưa? Nếu cảm giác này kéo dài, mình khuyên thật lòng bạn nên nói với thầy cô hoặc người thân. Bạn không cần phải gánh vác một mình.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (msg.includes("tương lai") || msg.includes("nghề") || msg.includes("đại học") || msg.includes("định hướng")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Bạn đang băn khoăn về định hướng tương lai à? Đây là giai đoạn nhiều bạn lo lắng. Hãy liệt kê những thứ bạn thích và điểm mạnh của mình. Không cần phải quyết định ngay. Bạn có thể tham khảo thầy cô hoặc làm một số bài test hướng nghiệp. Mình tin bạn sẽ tìm ra con đường phù hợp!";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Fallback</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return `Cảm ơn bạn đã tin tưởng chia sẻ với mình. Mình đang lắng nghe và thấu hiểu những gì bạn đang trải qua. Dù vấn đề có nhỏ hay lớn, việc nói ra đã là một bước rất dũng cảm rồi. Bạn có muốn kể thêm chi tiết không?&lt;br&gt;&lt;br&gt;Nhớ nhé, bạn không cần phải tự mình gánh vác mọi thứ — hãy tìm đến bạn bè, gia đình, thầy cô hoặc chuyên gia khi cần. Mình luôn ở đây đồng hành cùng bạn ❤️`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function sendMessage() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const input = document.getElementById('user-input');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const text = input.value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!text) return;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>addMessage(text, true);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>input.value = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = getAIResponse(text);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>addMessage(response, false);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 800);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function startTopic(topic) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('messages');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let greeting = "Chào bạn! Mình rất vui khi bạn muốn nói về chủ đề này.";</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (topic === 'ap-luc') greeting = "Áp lực học tập là một trong những vấn đề phổ biến nhất. Bạn đang cảm thấy áp lực như thế nào? Mình sẵn sàng lắng nghe và cùng bạn tìm cách vượt qua nhé.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (topic === 'ban-be') greeting = "Bạn đang gặp khó khăn với bạn bè phải không? Kể mình nghe đi, mình sẽ cố gắng thấu hiểu và đưa ra lời khuyên chân thành.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (topic === 'dong-luc') greeting = "Thiếu động lực học tập là chuyện rất bình thường. Bạn đang cảm thấy chán hay mệt mỏi vì học? Mình ở đây để cùng bạn tìm lại động lực.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (topic === 'can-thang') greeting = "Căng thẳng và lo âu là cảm xúc hoàn toàn bình thường. Bạn đang lo lắng điều gì? Mình lắng nghe đây, và mình khuyên bạn đừng ngần ngại tìm sự hỗ trợ từ người thân.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (topic === 'tuong-lai') greeting = "Định hướng tương lai đôi khi khiến ta bối rối. Bạn đang nghĩ gì về tương lai của mình? Mình ở đây để cùng bạn suy nghĩ tích cực nhé.";</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>addMessage(greeting, false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function clearChat() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm("Bạn có chắc muốn xóa toàn bộ cuộc trò chuyện không?")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('messages').innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>addMessage("Chào bạn! ❤️&lt;br&gt;&lt;br&gt;Mình là &lt;strong&gt;Bạn Đồng Hành&lt;/strong&gt;, AI chuyên lắng nghe và đồng hành cùng các bạn học sinh về tâm lý học đường.&lt;br&gt;&lt;br&gt;Mình luôn ở đây để lắng nghe, thấu hiểu và cùng bạn tìm hướng giải quyết. Bạn không cần phải mạnh mẽ một mình.&lt;br&gt;&lt;br&gt;Hôm nay bạn muốn chia sẻ gì nào?", false);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 300);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>initTailwind();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>addMessage("Chào bạn! ❤️&lt;br&gt;&lt;br&gt;Mình là &lt;strong&gt;Bạn Đồng Hành&lt;/strong&gt;, AI chuyên lắng nghe và đồng hành cùng các bạn học sinh về tâm lý học đường.&lt;br&gt;&lt;br&gt;Mình luôn ở đây để lắng nghe, thấu hiểu và cùng bạn tìm hướng giải quyết những khó khăn từ nhỏ đến lớn. Bạn không cần phải mạnh mẽ một mình.&lt;br&gt;&lt;br&gt;Hôm nay bạn đang cảm thấy thế nào? Kể mình nghe nhé!", false);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 300);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
