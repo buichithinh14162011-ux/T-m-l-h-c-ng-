@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bạn Đồng Hành - Tâm Lý Học Đường</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .chat-container { max-height: 70vh; overflow-y: auto; }
+        .message { max-width: 80%; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-teal-50 min-h-screen">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-72 bg-white shadow-2xl flex flex-col">
+            <div class="p-6 border-b">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-teal-500 text-white rounded-3xl flex items-center justify-center text-3xl">🌱</div>
+                    <div>
+                        <h1 class="text-2xl font-semibold text-gray-800">Bạn Đồng Hành</h1>
+                        <p class="text-teal-600">Tâm lý học đường</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 flex-1 overflow-y-auto">
+                <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-4 px-3">Chủ đề hay gặp</h2>
+                <div onclick="startTopic('ap-luc')" class="px-4 py-3 hover:bg-teal-50 rounded-3xl cursor-pointer flex items-center gap-3 text-gray-700 mb-1">📚 Áp lực học tập</div>
+                <div onclick="startTopic('mat-tap-trung')" class="px-4 py-3 hover:bg-teal-50 rounded-3xl cursor-pointer flex items-center gap-3 text-gray-700 mb-1">😶 Mất tập trung</div>
+                <div onclick="startTopic('ban-be')" class="px-4 py-3 hover:bg-teal-50 rounded-3xl cursor-pointer flex items-center gap-3 text-gray-700 mb-1">👥 Mâu thuẫn bạn bè</div>
+                <div onclick="startTopic('can-thang')" class="px-4 py-3 hover:bg-teal-50 rounded-3xl cursor-pointer flex items-center gap-3 text-gray-700 mb-1">😟 Căng thẳng, lo âu</div>
+                <div onclick="startTopic('tuong-lai')" class="px-4 py-3 hover:bg-teal-50 rounded-3xl cursor-pointer flex items-center gap-3 text-gray-700">🚀 Định hướng tương lai</div>
+            </div>
+            
+            <div class="p-6 text-xs text-teal-600 border-t mt-auto">
+                Bạn không cần phải mạnh mẽ một mình.<br>
+                Mình luôn ở đây lắng nghe ❤️
+            </div>
+        </div>
+
+        <!-- Chat -->
+        <div class="flex-1 flex flex-col">
+            <div class="bg-white px-6 py-4 shadow-sm flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-teal-100 rounded-3xl flex items-center justify-center text-3xl">🌱</div>
+                    <div>
+                        <h2 class="font-semibold text-gray-800">Bạn Đồng Hành</h2>
+                        <p class="text-green-500 text-sm flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>Đang lắng nghe</p>
+                    </div>
+                </div>
+                <button onclick="clearChat()" class="flex items-center gap-2 text-gray-500 hover:text-red-500 text-sm">
+                    <i class="fas fa-trash"></i>
+                    <span>Xóa cuộc trò chuyện</span>
+                </button>
+            </div>
+
+            <div id="chat-container" class="flex-1 p-6 bg-[radial-gradient(#f1f5f9_1px,transparent_1px)] [background-size:30px_30px] chat-container">
+                <div id="messages" class="max-w-3xl mx-auto space-y-6"></div>
+            </div>
+
+            <div class="bg-white border-t p-4">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex bg-gray-100 rounded-3xl p-2">
+                        <input id="user-input" type="text" 
+                               placeholder="Bạn đang cảm thấy thế nào hôm nay? Kể mình nghe nhé..."
+                               class="flex-1 bg-transparent px-6 outline-none text-gray-700 placeholder-gray-400 text-base"
+                               onkeydown="if(event.key === 'Enter') sendMessage()">
+                        <button onclick="sendMessage()" class="bg-teal-500 hover:bg-teal-600 w-12 h-12 rounded-3xl text-white flex items-center justify-center transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addMessage(text, isUser) {
+            const container = document.getElementById('messages');
+            const div = document.createElement('div');
+            div.className = `flex ${isUser ? 'justify-end' : 'justify-start'} message`;
+            
+            if (isUser) {
+                div.innerHTML = `<div class="bg-teal-500 text-white px-5 py-3.5 rounded-3xl rounded-tr-none">${text}</div>`;
+            } else {
+                div.innerHTML = `
+                <div class="flex gap-3">
+                    <div class="w-9 h-9 bg-teal-100 rounded-3xl flex-shrink-0 flex items-center justify-center text-3xl">🌱</div>
+                    <div class="bg-white shadow px-5 py-3.5 rounded-3xl rounded-tl-none text-gray-700">${text}</div>
+                </div>`;
+            }
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if (msg.includes("áp lực") || msg.includes("thi") || msg.includes("học")) {
+                return "Mình hiểu rồi… Áp lực học tập khiến bạn cảm thấy rất nặng nề phải không? Bạn đang lo về điểm số hay kỳ thi sắp tới? Mình ở đây lắng nghe bạn kể hết nhé. Dù áp lực đến đâu, bạn cũng không cần gánh một mình. Có thể chia sẻ với thầy cô hoặc gia đình để cùng tìm cách nhẹ nhàng hơn ❤️";
+            }
+            if (msg.includes("tập trung") || msg.includes("chán") || msg.includes("mất tập trung")) {
+                return "Mình thấy bạn đang khó tập trung. Đây là chuyện rất nhiều bạn gặp phải. Bạn đang cảm thấy mệt mỏi hay bị phân tâm bởi điều gì đó? Chúng ta có thể cùng nghĩ ra những cách nhỏ để bạn quay lại với việc học một cách nhẹ nhàng hơn nhé. Bạn không cô đơn đâu.";
+            }
+            if (msg.includes("bạn") || msg.includes("cãi") || msg.includes("mâu thuẫn")) {
+                return "Nghe bạn nói về bạn bè, mình cảm nhận được bạn đang buồn và bối rối. Mâu thuẫn là điều bình thường, nhưng nó làm mình rất khó chịu đúng không? Bạn muốn kể chi tiết hơn không? Mình sẽ lắng nghe và cùng bạn tìm cách làm lành hoặc giữ khoảng cách lành mạnh.";
+            }
+            if (msg.includes("căng") || msg.includes("lo") || msg.includes("stress") || msg.includes("buồn")) {
+                return "Mình đang lắng nghe đây… Căng thẳng và lo âu khiến bạn cảm thấy rất mệt mỏi phải không? Cảm giác này thật khó chịu. Bạn đã thử hít thở sâu hay đi dạo chưa? Nếu cảm giác này kéo dài, mình thật lòng khuyên bạn nên nói chuyện với người thân hoặc thầy cô. Bạn xứng đáng được giúp đỡ ❤️";
+            }
+            if (msg.includes("tương lai") || msg.includes("nghề") || msg.includes("đại học")) {
+                return "Định hướng tương lai đôi khi khiến mình cảm thấy bối rối và lo lắng đúng không? Bạn đang suy nghĩ về con đường nào? Mình rất vui khi được cùng bạn khám phá những điểm mạnh và điều bạn thích. Không cần phải quyết định ngay hôm nay đâu. Chúng ta sẽ cùng tìm hướng tích cực nhé!";
+            }
+            
+            // Phản hồi mặc định - luôn lắng nghe
+            return `Cảm ơn bạn đã tin tưởng chia sẻ với mình.<br><br>Mình đang lắng nghe và thấu hiểu những gì bạn đang trải qua. Dù vấn đề lớn hay nhỏ, việc bạn nói ra đã là một bước rất dũng cảm rồi. Bạn có muốn kể thêm không?<br><br>Nhớ nhé, bạn <strong>không cần phải tự mình gánh vác mọi thứ</strong>. Hãy tìm đến bạn bè, gia đình, thầy cô hoặc người lớn tin cậy khi cần. Mình luôn ở đây đồng hành cùng bạn ❤️`;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const text = input.value.trim();
+            if (!text) return;
+            
+            addMessage(text, true);
+            input.value = '';
+            
+            setTimeout(() => {
+                const response = getAIResponse(text);
+                addMessage(response, false);
+            }, 800);
+        }
+
+        function startTopic(topic) {
+            const messages = document.getElementById('messages');
+            messages.innerHTML = '';
+            
+            let greeting = "Chào bạn! Mình rất vui khi bạn muốn nói về chủ đề này. Kể mình nghe bạn đang cảm thấy thế nào nhé?";
+            
+            if (topic === 'ap-luc') greeting = "Áp lực học tập là một trong những điều nhiều bạn đang gặp phải. Bạn đang cảm thấy áp lực ra sao? Mình ở đây để lắng nghe và cùng bạn tìm hướng đi nhẹ nhàng hơn ❤️";
+            else if (topic === 'mat-tap-trung') greeting = "Mất tập trung khiến việc học trở nên khó khăn đúng không? Bạn đang gặp khó khăn gì? Mình sẽ lắng nghe và cùng bạn nghĩ cách lấy lại sự tập trung một cách dịu dàng.";
+            else if (topic === 'ban-be') greeting = "Mâu thuẫn với bạn bè có thể làm mình rất buồn. Bạn đang trải qua điều gì? Kể mình nghe, mình sẽ cùng bạn suy nghĩ cách giải quyết tích cực.";
+            else if (topic === 'can-thang') greeting = "Căng thẳng và lo âu là cảm xúc thật. Bạn đang lo lắng về điều gì? Mình lắng nghe đây, và mình muốn nhắc bạn rằng bạn không cần phải chịu đựng một mình.";
+            else if (topic === 'tuong-lai') greeting = "Định hướng tương lai đôi khi làm ta bối rối. Bạn đang nghĩ gì về tương lai của mình? Mình rất muốn cùng bạn khám phá những khả năng tích cực nhé!";
+            
+            addMessage(greeting, false);
+        }
+
+        function clearChat() {
+            if (confirm("Bạn có muốn xóa toàn bộ cuộc trò chuyện không?")) {
+                document.getElementById('messages').innerHTML = '';
+                setTimeout(() => {
+                    addMessage("Chào bạn! ❤️<br><br>Mình là <strong>Bạn Đồng Hành</strong> – AI luôn lắng nghe và đồng hành cùng bạn trong hành trình học đường.<br><br>Mình ở đây để thấu hiểu, chia sẻ và cùng bạn tìm ra hướng đi tích cực. Hôm nay bạn muốn tâm sự gì nào?", false);
+                }, 300);
+            }
+        }
+
+        // Khởi động app
+        window.onload = () => {
+            addMessage("Chào bạn! ❤️<br><br>Mình là <strong>Bạn Đồng Hành</strong>, AI chuyên lắng nghe tâm sự học đường.<br><br>Mình luôn ở đây để lắng nghe, thấu hiểu và đồng hành cùng bạn – dù là áp lực học tập, mất tập trung, mâu thuẫn bạn bè, căng thẳng hay lo lắng về tương lai.<br><br>Bạn đang cảm thấy thế nào hôm nay? Kể mình nghe nhé, mình đang lắng nghe đây.", false);
+        };
+    </script>
+</body>
+</html>
