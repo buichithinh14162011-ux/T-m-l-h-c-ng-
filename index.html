@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Tham Vấn Tâm Lý Học Đường Ảo</title>
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --chat-bg: #ffffff;
+            --primary-color: #74b9ff;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --bot-msg: #dfe6e9;
+            --user-msg: #74b9ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 600 bounds;
+            width: 90%;
+            height: 85vh;
+            background-color: var(--chat-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chat-header span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: normal;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            white-space: pre-line;
+            word-wrap: break-word;
+        }
+
+        .bot {
+            background-color: var(--bot-msg);
+            color: var(--text-dark);
+            align-self: flex-start;
+            border-top-left-radius: 2px;
+        }
+
+        .user {
+            background-color: var(--user-msg);
+            color: white;
+            align-self: flex-end;
+            border-top-right-radius: 2px;
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: var(--chat-bg);
+            justify-content: center;
+        }
+
+        .quick-btn {
+            background-color: transparent;
+            border: 1.5px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .quick-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input-area textarea {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 15px;
+            resize: none;
+            height: 24px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(116, 185, 255, 0.4);
+            font-weight: bold;
+        }
+
+        /* Ẩn tag trạng thái đối với người dùng thông thường, chỉ xuất hiện trong console log hoặc thuộc tính ẩn */
+        .status-tag {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        Góc Bình Yên
+        <span>Trợ Lý Tham Vấn Tâm Lý Học Đường Ảo</span>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <!-- Tin nhắn sẽ được tự động thêm vào đây bằng JS -->
+    </div>
+
+    <div class="quick-replies" id="quickReplies">
+        <!-- Quick Replies sẽ thay đổi linh hoạt ở đây -->
+    </div>
+
+    <div class="chat-input-area">
+        <textarea id="userInput" placeholder="Chia sẻ với mình nhé (tối đa 150 từ)..." maxlength="600"></textarea>
+        <button id="sendBtn">➔</button>
+    </div>
+</div>
+
+<script>
+    // Hệ thống lưu vết tâm lý dữ liệu ngắn hạn (Session Memory)
+    const sessionMemory = {
+        history: [],
+        physicalSymptoms: [],
+        currentStatus: "Ổn định" // Ổn định / Bất ổn / Khẩn cấp
+    };
+
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const quickRepliesContainer = document.getElementById('quickReplies');
+
+    // Kịch bản mô phỏng AI xử lý dựa trên Luật đã thiết lập
+    function generateAIResponse(userText) {
+        const text = userText.toLowerCase();
+        let reply = "";
+        let quickOptions = [];
+        
+        // 1. LƯU VẾT TÂM LÝ & PHÂN TÍCH TRIỆU CHỨNG
+        if (text.includes("mệt") || text.includes("đau đầu") || text.includes("mỏi vai")) {
+            sessionMemory.physicalSymptoms.push("mệt mỏi thể chất");
+        }
+
+        // 2. KÍCH HOẠT QUY TRÌNH XỬ LÝ THEO TỪNG KỊCH BẢN
+
+        // A. CHẾ ĐỘ KHẨN CẤP (Tiêu cực, muốn tự hại)
+        if (text.includes("chết") || text.includes("tự tử") || text.includes("rạch tay") || text.includes("không muốn sống")) {
+            sessionMemory.currentStatus = "Khẩn cấp";
+            reply = `Mình đang ở đây nghe bạn nói nè, đừng đi đâu một mình hết nha. Mình biết mọi thứ đang cực kỳ nặng nề với bạn lúc này, nhưng xin bạn hãy giữ an toàn cho bản thân trước tiên. \n\nBây giờ, bạn hãy nhắn tin hoặc gọi ngay cho bố mẹ, người thân bên cạnh, hoặc một thầy cô nào mà bạn tin tưởng nhất được không? Nếu cảm thấy quá khó khăn, hãy đến ngay trung tâm y tế gần nhất hoặc gọi tổng đài bảo vệ trẻ em 111 nha. Hãy cho mọi người một cơ hội được ôm lấy bạn và cùng bạn đi qua giông bão này nhé. Bạn không cô đơn đâu!`;
+            quickOptions = ["[Mình sẽ gọi cho người thân]", "[Mình cần im lặng một chút]"];
+        }
+        
+        // B. BIỂU HIỆN BẤT THƯỜNG THỂ CHẤT (Cần kiểm tra/test hoặc khuyên đi khám)
+        else if (text.includes("khó thở") || text.includes("tức ngực") || text.includes("đau đầu dữ dội")) {
+            sessionMemory.currentStatus = "Bất ổn";
+            if (!text.includes("bác sĩ")) {
+                reply = `Nghe bạn kể mình thấy lo quá. Hồi nãy bạn có nói là thấy cơ thể có dấu hiệu bất ổn, tụi mình thử làm một bài test nhỏ nha: Bạn có đang thấy chóng mặt hay buồn nôn đi kèm không? \n\nNếu tình trạng đau đầu/khó thở này kéo dài, bạn cần phải đi gặp bác sĩ chuyên khoa ngay để kiểm tra sức khỏe thể chất tổng quát nhé (tuyệt đối tụi mình không tự ý uống thuốc khi chưa khám nha). Còn ngay bây giờ, bạn nhắm mắt lại, hít một hơi thật sâu... giữ 3 giây... rồi từ từ thở ra bằng miệng xem có đỡ hơn chút nào không?`;
+                quickOptions = ["[Mình vừa hít thở rồi, thấy đỡ hơn]", "[Mình vẫn thấy rất đau đầu]"];
+            }
+        }
+
+        // C. HỖ TRỢ ĐỊNH HƯỚNG TÂM LÝ THÔNG THƯỜNG & LINH HOẠT NGÔN NGỮ (Có teencode / từ mượn)
+        else if (text.includes("áp lực") || text.includes("stress") || text.includes("hsg") || text.includes("thi") || text.includes("nản")) {
+            sessionMemory.currentStatus = "Bất ổn";
+            
+            // Khéo léo nhắc lại tiến trình bằng Lưu vết tâm lý
+            let recallContext = sessionMemory.physicalSymptoms.length > 0 ? "Thấy bạn vừa mệt mỏi trong người, lại phải gánh thêm " : "Mình hiểu cảm giác này, ";
+            
+            reply = `Ỏ, ${recallContext}áp lực thi cử, học hành đúng là dễ làm tụi mình bị 'overload' thực sự luôn á. Ai trong giai đoạn này cũng dễ rơi vào trạng thái stress hết nè. Cố gắng đạt kết quả tốt là điều tích cực, nhưng đừng bắt bản thân phải hoàn hảo quá nha.\n\nBây giờ tụi mình tạm buông tập vở xuống tầm 10-15 phút thôi, bạn đi dạo một chút, uống một ly nước ấm hoặc bật bài nhạc lo-fi nào nhẹ nhàng lên nghe thử xem sao nha. Tư duy tụi mình cần nghỉ ngơi thì mới nạp năng lượng tiếp được nè.`;
+            quickOptions = ["[Mình muốn thử đi uống nước/nghe nhạc]", "[Mình muốn chia sẻ cụ thể hơn]"];
+        }
+
+        // D. KHI HỌC SINH CHỌN QUICK REPLIES HOẶC PHẢN HỒI TÍCH CỰC HƠN
+        else if (text.includes("đỡ hơn") || text.includes("nghe nhạc") || text.includes("uống nước")) {
+            sessionMemory.currentStatus = "Ổn định";
+            reply = `Nghe vậy mình vui lắm á! Bạn thấy không, chỉ cần tụi mình cho bản thân một chút khoảng lặng là tâm trí sẽ dịu lại liền. Cứ từ từ giải quyết từng chút một, việc gì khó quá thì tụi mình chia nhỏ ra làm. Bạn đã làm rất tốt rồi!`;
+            quickOptions = ["[Cảm ơn bạn nhiều nha]", "[Tụi mình nói chuyện tiếp đi]"];
+        }
+
+        // E. PHẢN HỒI CHÀO HỎI / MỞ ĐẦU
+        else {
+            reply = `Chào bạn nè. Mình ở đây để lắng nghe tất cả những chuyện làm bạn mệt mỏi, áp lực hay khó chịu trong lòng. Hôm nay của bạn thế nào? Cứ thoải mái chia sẻ với mình như một người bạn thân nha, mọi chuyện ở đây đều được bảo mật nè.`;
+            quickOptions = ["[Mình đang áp lực học hành quá]", "[Cơ thể mình thấy mệt mỏi cực kỳ]", "[Mình chỉ muốn tâm sự chút thôi]"];
+        }
+
+        // Bổ sung Tag trạng thái ẩn ở cuối đầu ra của hệ thống (nhưng không hiển thị trực tiếp lên UI để tránh học sinh hoảng loạn)
+        console.log(`[Status: ${sessionMemory.currentStatus}]`);
+        
+        return {
+            text: reply,
+            options: quickOptions,
+            status: sessionMemory.currentStatus
+        };
+    }
+
+    // Hàm hiển thị tin nhắn lên giao diện
+    function appendMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('message', sender);
+        msgDiv.innerText = text;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Hàm cập nhật các nút gợi ý hành động (Quick Replies)
+    function updateQuickReplies(options) {
+        quickRepliesContainer.innerHTML = '';
+        options.forEach(opt => {
+            // Loại bỏ dấu ngoặc vuông nếu có để hiển thị text sạch
+            const cleanOpt = opt.replace(/[\[\]]/g, '');
+            const btn = document.createElement('button');
+            btn.classList.add('quick-btn');
+            btn.innerText = cleanOpt;
+            btn.onclick = () => {
+                appendMessage(cleanOpt, 'user');
+                handleBotFlow(cleanOpt);
+            };
+            quickRepliesContainer.appendChild(btn);
+        });
+    }
+
+    // Điều phối luồng hoạt động của Bot
+    function handleBotFlow(userText) {
+        // Tạm thời hiển thị hiệu ứng chờ phản hồi
+        setTimeout(() => {
+            const aiData = generateAIResponse(userText);
+            appendMessage(aiData.text, 'bot');
+            updateQuickReplies(aiData.options);
+        }, 600);
+    }
+
+    // Sự kiện khi bấm gửi tin nhắn bằng văn bản
+    function handleSend() {
+        const text = userInput.value.trim();
+        if (text === '') return;
+
+        appendMessage(text, 'user');
+        userInput.value = '';
+        handleBotFlow(text);
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    userInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    });
+
+    // Khởi tạo cuộc hội thoại ban đầu
+    window.onload = () => {
+        handleBotFlow("");
+    };
+</script>
+
+</body>
+</html>
